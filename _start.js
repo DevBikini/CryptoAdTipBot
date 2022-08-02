@@ -1,1 +1,1 @@
-
+Bot.sendMessage("👋 hello")

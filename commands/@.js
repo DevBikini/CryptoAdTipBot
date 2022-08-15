@@ -148,3 +148,14 @@ function getOnline(top_count) {
   }
   return result
 }
+//get percentage
+function Getko(users, amount, recent) {
+  if (user == 1) {
+    return amount
+  } else {
+    var random = Libs.Random.randomFloat(1, recent)
+    var clc = (amount * random) / 100
+    var dam = clc + "&" + random
+    return dam
+  }
+}

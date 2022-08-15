@@ -70,9 +70,9 @@ var json = {
   owner: user.telegramid
 }
 balance.add(-amount)
-var add = Bot.getProperty("draw_" + request.chat.id, { list: {} })
+var add = Bot.getProperty("draw=" + request.chat.id, { list: {} })
 add.list[id] = json
-Bot.setProperty("draw_" + request.chat.id, add, "json")
+Bot.setProperty("draw=" + request.chat.id, add, "json")
 Api.sendMessage({
   text:
     data.html +

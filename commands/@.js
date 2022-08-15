@@ -153,7 +153,7 @@ function Getko(users, amount, recent) {
   if (user == 1) {
     return amount
   } else {
-    var random = Libs.Random.randomFloat(1, recent)
+    var random = Math.floor(Math.random() * (recent - 1))
     var clc = (amount * random) / 100
     var dam = clc + "&" + random
     return dam

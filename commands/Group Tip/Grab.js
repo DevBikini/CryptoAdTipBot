@@ -25,34 +25,37 @@ if (!params) {
       var numberPeople = draw.list[ind].numberPeople
       var participate = draw.list[ind].participate
       var currency = draw.list[ind].currency
+      var percentage = draw.list[ind].percentage
       var balance = Libs.ResourcesLib.userRes(currency)
       var owner = draw.list[ind].owner
       var amount = draw.list[ind].amount
-      var json = {
-        id: id,
-        amount: amount,
-        numberPeople: numberPeople,
-        participate: participate + 1,
-        currency: currency,
-        owner: owner
-      }
       if (participate + 1 < numberPeople) {
         if (!addko.list[user.telegramid]) {
-          addko.list[user.telegramid] = user.telegramid
+          var git = Getko(numberPeople, amount, percentage)
+          var recentlyPercent = git.split("&")[1]
+          var amot = git.split("&")[0]
+          addko.list[user.telegramid] = {
+            usertg: user.telegramid,
+            amount: amot
+          }
           Bot.setProperty("list2_" + id, addko, "json")
+          var json = {
+            id: id,
+            amount: amount - amot,
+            numberPeople: numberPeople,
+            participate: participate + 1,
+            currency: currency,
+            owner: owner,
+            percentage: recentlyPercent
+          }
           draw.list[id] = json
           Bot.setProperty("draw=" + request.chat.id, draw, "json")
           Api.sendMessage({
             text:
-              "<b>" +
-              currency +
-              "</b> <code>+" +
-              amount +
-              "</code> " +
-              data.html,
+              "<b>" + currency + "</b> <code>+" + amot + "</code> " + data.html,
             parse_mode: "html"
           })
-          balance.add(+amount)
+          balance.add(+amot)
         }
       }
       //next
@@ -71,7 +74,10 @@ if (!params) {
           balance.add(+amount)
 
           var addG = Bot.getProperty("list2_" + id, { list: {} })
-          addG.list[user.telegramid] = user.telegramid
+          addG.list[user.telegramid] = {
+            usertg: user.telegramid,
+            amount: amount
+          }
           Bot.setProperty("list2_" + id, addG, "json")
           draw.list[id] = Bot.setProperty(
             "draw=" + request.chat.id,
@@ -81,14 +87,16 @@ if (!params) {
           var winner = ""
           var no = 0
           for (var ind in addG.list) {
+            var tgd = addG.list[ind].usertg
+            var amm = addG.list[ind].amount
             var no = no + 1
             var winner =
               winner +
               no +
               ". " +
-              Bot.getProperty(addG.list[ind]).html +
+              Bot.getProperty(tgd).html +
               " <code>" +
-              amount +
+              amm +
               "</code> <b>" +
               currency +
               "</b>\n"

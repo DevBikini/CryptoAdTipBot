@@ -149,15 +149,14 @@ function getOnline(top_count) {
   return result
 }
 //get percentage
-
 function Getko(users, amount, recent) {
-
   var random = Math.floor(Math.random() * (recent - 1))
-
-  var clc = (amount * random) / 100
-
+  if (random == 0) {
+    var rasta = 1
+  } else {
+    var rasta = random
+  }
+  var clc = (amount * rasta) / 100
   var dam = clc + "&" + random
-
   return dam
-
 }

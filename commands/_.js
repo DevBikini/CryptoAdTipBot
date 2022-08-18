@@ -13,6 +13,9 @@ CMD*/
 if (request.sender_chat && request.sender_chat.type == "channel") {
   return
 }
+if (request.from.is_bot == "true") {
+  return
+}
 if (coolDown()) {
   var gff = Libs.ResourcesLib.anotherChatRes("gff", "global")
   User.setProperty("cooldown_" + request.chat.id, Date.now(), "integer")
@@ -66,9 +69,11 @@ if (banned_words) {
   }
   if (request.entities.length > 0) {
     var url = request.entities[0].url
-    if (url.includes(banned_words[index])) {
-      Api.deleteMessage({ message_id: request.message_id })
-      return
+    if (url) {
+      if (url.includes(banned_words[index])) {
+        Api.deleteMessage({ message_id: request.message_id })
+        return
+      }
     }
     //index
   }

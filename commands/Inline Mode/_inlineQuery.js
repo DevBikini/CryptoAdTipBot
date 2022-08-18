@@ -69,7 +69,7 @@ function GetName(name) {
     var text = name.split(name.split(" ")[0])[1]
     var ffg =
       "https://api.secretprojects.xyz/v1/translator/?text=" +
-      encodeURI(text) +
+      encodeURIComponent(text) +
       "&language=en"
     var url = ffg
     HTTP.get({

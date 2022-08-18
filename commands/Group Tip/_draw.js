@@ -67,7 +67,8 @@ var json = {
   numberPeople: numberPeople,
   participate: 0,
   currency: currency.toUpperCase(),
-  owner: user.telegramid
+  owner: user.telegramid,
+  percentage: 100
 }
 balance.add(-amount)
 var add = Bot.getProperty("draw=" + request.chat.id, { list: {} })
@@ -85,3 +86,4 @@ Api.sendMessage({
     "</code> users.\nSend <code>Grab</code> to grab it!",
   parse_mode: "html"
 })
+

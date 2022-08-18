@@ -22,8 +22,7 @@ var op = params.split(" ")[3]
 if (!op) {
   var optional = "Grab"
 } else {
-  var optional =
-    "Grab" + params.split(numberPeople)[1]+[params.split(numberPeople)[2]]
+  var optional = "Grab" + params.split(numberPeople)[2]
 }
 if (
   !amount ||
@@ -96,3 +95,4 @@ Api.sendMessage({
     "</code> to grab it!",
   parse_mode: "html"
 })
+

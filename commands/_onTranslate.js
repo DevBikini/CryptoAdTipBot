@@ -9,10 +9,7 @@
   aliases: 
 CMD*/
 
-/*var json = JSON.parse(content)
-Bot.sendMessage(json.translated_text, {
+var json = JSON.parse(content)
+Bot.sendMessage(json.translated, {
   is_reply: true
 })
-*/
-Bot.inspect(content)
-

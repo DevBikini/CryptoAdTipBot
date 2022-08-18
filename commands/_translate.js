@@ -17,9 +17,12 @@ if (!request.reply_to_message) {
   } else {
     var lang = params
   }
-  var text = encodeURI(request.reply_to_message.text)
+  var text = request.reply_to_message.text
   var url =
-    "https://api.crypto-twilight.com/translate?msg=text%20for%20translate&to=hi"
+    "https://api.secretprojects.xyz/v1/translator/?text=" +
+    encodeURIComponent(text) +
+    "&language=" +
+    lang
   HTTP.get({
     url: url,
     success: "/onTranslate"

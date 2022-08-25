@@ -26,6 +26,18 @@ if (chat.chat_type == "private") {
 }
 var admin = Bot.getProperty("admin_" + request.chat.id, { list: {} })
 if (request.reply_to_message) {
+  var tgid = request.reply_to_message.from.id
+  var botk = request.reply_to_message.from.id.is_bot | (tgid == 777000)
+  //valid user
+  if (!Bot.getProperty(tgid)) {
+    Bot.sendMessage("*User not found*!")
+    return
+  }
+  //admin and bot
+  if ((admin.list[tgid] == tgid) | botk) {
+    Bot.sendMessage("You Can't unban admininstration or bot & channel")
+    return
+  }
   if (admin.list[user.telegramid] == user.telegramid) {
     Api.unbanChatMember({
       chat_id: request.chat.id,
@@ -40,13 +52,18 @@ if (request.reply_to_message) {
       parse_mode: "html"
     })
     //mute
-return 
-  } 
+    return
+  }
   return
 }
 if (!params) {
   Bot.sendMessage("⚠️ Incorrect Format use\n`/unban @user`")
 } else {
+  //admin and bot
+  if (admin.list[params] == params) {
+    Bot.sendMessage("You Can't kick admininstration or bot & channel")
+    return
+  }
   if (!Bot.getProperty(params)) {
     Bot.sendMessage("*User not found*!")
     return

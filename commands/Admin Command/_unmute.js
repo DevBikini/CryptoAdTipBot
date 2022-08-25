@@ -26,7 +26,19 @@ if (chat.chat_type == "private") {
 }
 var admin = Bot.getProperty("admin_" + request.chat.id, { list: {} })
 if (request.reply_to_message) {
+  var tgid = request.reply_to_message.from.id
+  var botk = request.reply_to_message.from.id.is_bot | (tgid == 777000)
   if (admin.list[user.telegramid] == user.telegramid) {
+//valid user
+    if (!Bot.getProperty(tgid)) {
+      Bot.sendMessage("*User not found*!")
+      return
+    }
+    //admin and bot
+    if ((admin.list[tgid] == tgid) | botk) {
+      Bot.sendMessage("You Can't unmute admininstration or bot & channel")
+      return
+    }
     Api.restrictChatMember({
       chat_id: request.chat.id,
       user_id: request.reply_to_message.from.id,
@@ -60,6 +72,11 @@ if (!params) {
     return
   }
   if (admin.list[user.telegramid] == user.telegramid) {
+    //admin and bot
+    if (admin.list[params] == params) {
+      Bot.sendMessage("You Can't kick admininstration or bot & channel")
+      return
+    }
     Api.restrictChatMember({
       chat_id: request.chat.id,
       user_id: Bot.getProperty(params).user_id,
@@ -84,4 +101,3 @@ if (!params) {
     return
   }
 }
-

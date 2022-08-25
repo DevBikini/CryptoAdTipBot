@@ -29,6 +29,17 @@ var admin = Bot.getProperty("admin_" + request.chat.id, { list: {} })
 if (request.reply_to_message) {
   if (admin.list[user.telegramid] == user.telegramid) {
     var tgid = request.reply_to_message.from.id
+    var botk = request.reply_to_message.from.id.is_bot | (tgid == 777000)
+    //valid user
+    if (!Bot.getProperty(tgid)) {
+      Bot.sendMessage("*User not found*!")
+      return
+    }
+    //admin and bot
+    if ((admin.list[tgid] == tgid) | botk) {
+      Bot.sendMessage("You Can't ban admininstration or bot & channel")
+      return
+    }
     //admin command
     if (!params) {
       Api.banChatMember({
@@ -80,6 +91,11 @@ if (!params) {
 } else {
   //with params
   if (admin.list[user.telegramid] == user.telegramid) {
+    //admin and bot
+    if (admin.list[params] == params) {
+      Bot.sendMessage("You Can't ban admininstration or bot & channel")
+      return
+    }
     var tg = Bot.getProperty(params.split(" ")[0])
     if (!tg) {
       Bot.sendMessage("*User not found*!")

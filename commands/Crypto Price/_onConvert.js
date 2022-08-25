@@ -29,6 +29,11 @@ var amount = params.split(" ")[0]
 var coin2 = params.split(" ")[1]
 var price = result[0].current_price
 var ram = price * amount
+if (price.toFixed(0).length == 1) {
+  var lengths = 10
+} else {
+  var lengths = 0
+}
 Bot.sendMessage(
   "`Calculating " +
     amount +
@@ -39,7 +44,7 @@ Bot.sendMessage(
     "/" +
     coin2.toUpperCase() +
     "\n🔺 Price: " +
-    price.toFixed(10) +
+    price.toFixed(lengths) +
     " " +
     coin2.toUpperCase() +
     "\n🔴 " +

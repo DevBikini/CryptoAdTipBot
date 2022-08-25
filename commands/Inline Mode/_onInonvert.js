@@ -25,6 +25,11 @@ if (how == "[]" || result.error == "invalid vs_currency") {
   var price = result[0].current_price
   var image = result[0].image
   var ram = price * amount
+if (price.toFixed(0).length == 1) {
+  var lengths = 10
+} else {
+  var lengths = 0
+}
   var text =
     "`Calculating " +
     amount +
@@ -35,7 +40,7 @@ if (how == "[]" || result.error == "invalid vs_currency") {
     "/" +
     coin2.toUpperCase() +
     "\n🔺 Price: " +
-    price.toFixed(10) +
+    price.toFixed(lengths) +
     " " +
     coin2.toUpperCase() +
     "\n🔴 " +

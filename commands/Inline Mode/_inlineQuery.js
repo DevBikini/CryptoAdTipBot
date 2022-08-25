@@ -67,13 +67,13 @@ function GetName(name) {
   var translate = name.split(" ")[0]
   if (translate == "translate") {
     var text = name.split(name.split(" ")[0])[1]
-    var ffg =
-      "https://api.secretprojects.xyz/v1/translator/?text=" +
+    var url =
+      "https://api.crypto-twilight.com/translate?msg=" +
       encodeURIComponent(text) +
-      "&language=en"
-    var url = ffg
+      "&to=en" 
     HTTP.get({
       url: url,
+      folow_redirects: true,
       success: "/onInTranslate"
     })
     return

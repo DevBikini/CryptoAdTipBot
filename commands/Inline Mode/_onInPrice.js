@@ -21,7 +21,7 @@ if (how == "[]" || result.error == "invalid vs_currency") {
 } else {
   var symbol = result[0].symbol
   var price_usd = result[0].current_price
-var image = result[0].image
+  var image = result[0].image
   var mkt = result[0].market_cap
   var rank = result[0].market_cap_rank
   var vol = result[0].total_volume
@@ -69,6 +69,11 @@ var image = result[0].image
     var g = "🟢"
   }
   var ghty = params
+  if (price_usd.toFixed(0).length == 1) {
+    var lengths = 10
+  } else {
+    var lengths = 0
+  }
   var text =
     "*" +
     symbol.toUpperCase() +
@@ -79,15 +84,15 @@ var image = result[0].image
     "\n\n#️⃣ Rank : #" +
     rank +
     "*\n💲 *Price* : `" +
-    price_usd.toFixed(10) +
+    price_usd.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n📈 *High* : `" +
-    high.toFixed(10) +
+    high.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n📉* Low* : `" +
-    low.toFixed(10) +
+    low.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n🚀 *ATH *: `" +
@@ -100,19 +105,19 @@ var image = result[0].image
     g +
     " *1H* = `" +
     hour1.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g3 +
     " *24H* = `" +
     hour24.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g2 +
     " *7D* = `" +
     d7.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g1 +
     " *30D* = `" +
     d30.toFixed(2) +
-    "`%\n\n💁‍♂️ *SUPPLY* :  `" +
+    "%`\n\n💁‍♂️ *SUPPLY* :  `" +
     supply +
     " " +
     symbol.toUpperCase() +

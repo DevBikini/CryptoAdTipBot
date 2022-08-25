@@ -43,4 +43,3 @@ if (params) {
     success: "/onPrice " + usdt
   })
 }
-

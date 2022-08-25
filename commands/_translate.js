@@ -19,12 +19,14 @@ if (!request.reply_to_message) {
   }
   var text = request.reply_to_message.text
   var url =
-    "https://api.secretprojects.xyz/v1/translator/?text=" +
+    "https://api.crypto-twilight.com/translate?msg=" +
     encodeURIComponent(text) +
-    "&language=" +
+    "&to=" +
     lang
   HTTP.get({
     url: url,
+    folow_redirects: true,
     success: "/onTranslate"
   })
 }
+

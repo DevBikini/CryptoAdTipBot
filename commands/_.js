@@ -31,11 +31,11 @@ if (!add.list[user.telegramid]) {
   }
   Bot.setProperty("online_" + request.chat.id, add, "json")
 }
-//reset 1 hours
+//reset 3 hours
 if (canRun1()) {
   var gff = Libs.ResourcesLib.anotherChatRes("gff", "global")
   gff.add(+1)
-  Bot.setProperty("online_1_hours_" + request.chat.id, Date.now(), "integer")
+  Bot.setProperty("online_3_hours_" + request.chat.id, Date.now(), "integer")
 }
 //delete
 var deleted = Bot.getProperty("delete_" + request.chat.id)
@@ -79,4 +79,3 @@ if (banned_words) {
   }
   //banwords
 }
-

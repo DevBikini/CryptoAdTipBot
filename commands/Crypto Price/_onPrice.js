@@ -74,6 +74,11 @@ if (ho.includes("-")) {
   var g = "🟢"
 }
 var ghty = params
+if (price_usd.toFixed(0).length == 1) {
+  var lengths = 10
+} else {
+  var lengths = 0
+}
 Api.sendMessage({
   text:
     "*" +
@@ -85,15 +90,15 @@ Api.sendMessage({
     "\n\n#️⃣ Rank : #" +
     rank +
     "*\n💲 *Price* : `" +
-    price_usd.toFixed(price_usd.length) +
+    price_usd.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n📈 *High* : `" +
-    high.toFixed(10) +
+    high.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n📉* Low* : `" +
-    low.toFixed(10) +
+    low.toFixed(lengths) +
     " " +
     ghty.toUpperCase() +
     "`\n🚀 *ATH *: `" +
@@ -106,19 +111,19 @@ Api.sendMessage({
     g +
     " *1H* = `" +
     hour1.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g3 +
     " *24H* = `" +
     hour24.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g2 +
     " *7D* = `" +
     d7.toFixed(2) +
-    "`%\n" +
+    "%`\n" +
     g1 +
     " *30D* = `" +
     d30.toFixed(2) +
-    "`%\n\n💁‍♂️ *SUPPLY* :  `" +
+    "%`\n\n💁‍♂️ *SUPPLY* :  `" +
     supply +
     " " +
     symbol.toUpperCase() +

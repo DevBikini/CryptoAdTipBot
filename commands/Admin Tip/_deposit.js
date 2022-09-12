@@ -10,7 +10,12 @@
 CMD*/
 
 if (!params) {
+Bot.sendMessage("⚠️ Incorrect Format use\n`/deposit dgb`")
   return
+}
+var wallet = User.getProperty("wallets")
+if(wallet){
+return Bot.sendMessage("`" + wallet + "`")
 }
 Libs.CryptoAdGateWayBot.Deposit({
   currency: params,

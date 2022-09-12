@@ -4,14 +4,8 @@
   need_reply: true
   auto_retry_time: 
   folder: 
-
-  <<ANSWER
-
-  ANSWER
-
-  <<KEYBOARD
-
-  KEYBOARD
+  answer: 
+  keyboard: 
   aliases: 
 CMD*/
 
@@ -24,4 +18,3 @@ if (user.telegramid == 5514111111) {
 } else {
   Bot.sendMessage("Not admin")
 }
-

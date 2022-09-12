@@ -60,4 +60,3 @@ Bot.sendMessage(
     is_reply: true
   }
 )
-

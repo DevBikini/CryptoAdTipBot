@@ -70,11 +70,7 @@ if (request.reply_to_message) {
         return
       }
       var cov = params.split(key)[1]
-      if (!cov) {
-        var optional = "und3"
-      } else {
-        var optional = cov
-      }
+      var optional = GetOptional(cov, "und3")
       Api.banChatMember({
         chat_id: request.chat.id,
         user_id: tgid,
@@ -88,55 +84,57 @@ if (request.reply_to_message) {
 }
 if (!params) {
   Bot.sendMessage("⚠️ Incorrect Format use\n`/ban @user 30 seconds`")
-} else {
-  //with params
-  if (admin.list[user.telegramid] == user.telegramid) {
-    //admin and bot
-    if (admin.list[params] == params) {
-      Bot.sendMessage("You Can't ban admininstration or bot & channel")
-      return
-    }
-    var tg = Bot.getProperty(params.split(" ")[0])
-    if (!tg) {
-      Bot.sendMessage("*User not found*!")
-      return
-    }
-    var time = params.split(" ")[1]
-    if (!time) {
-      Api.banChatMember({
-        chat_id: request.chat.id,
-        user_id: tg.user_id,
-        on_result: "/baned " + tg.user_id + " und2 und3 und4"
-      })
-      return
-    }
-    if (!isNumeric(time)) {
-      Api.banChatMember({
-        chat_id: request.chat.id,
-        user_id: tg.user_id,
-        on_result: "/baned " + tg.user_id + " und2 und3 " + params
-      })
-      return
-    }
-    var key = params.split(" ")[2]
-    if (!key) {
-      Bot.sendMessage("⚠️ Incorrect Format use\n`/ban @user 30 seconds`")
-      return
-    }
-    var cov = params.split(key)[1]
-    if (!cov) {
-      var optional = "und3"
-    } else {
-      var optional = cov
-    }
+  return
+}
+//with params
+if (admin.list[user.telegramid] == user.telegramid) {
+  //admin and bot
+  if (admin.list[params] == params) {
+    Bot.sendMessage("You Can't ban admininstration or bot & channel")
+    return
+  }
+  var tg = Bot.getProperty(params.split(" ")[0])
+  if (!tg) {
+    Bot.sendMessage("*User not found*!")
+    return
+  }
+  var time = params.split(" ")[1]
+  if (!time) {
     Api.banChatMember({
       chat_id: request.chat.id,
       user_id: tg.user_id,
-      until_date: GetTime(key, time),
-      on_result:
-        "/baned " + tg.user_id + " " + time + " " + key + " " + optional
+      on_result: "/baned " + tg.user_id + " und2 und3 und4"
     })
     return
   }
+  if (!isNumeric(time)) {
+    Api.banChatMember({
+      chat_id: request.chat.id,
+      user_id: tg.user_id,
+      on_result: "/baned " + tg.user_id + " und2 und3 " + params
+    })
+    return
+  }
+  var key = params.split(" ")[2]
+  if (!key) {
+    Bot.sendMessage("⚠️ Incorrect Format use\n`/ban @user 30 seconds`")
+    return
+  }
+  var cov = params.split(key)[1]
+  var optional = GetOptional(cov, "und3")
+  Api.banChatMember({
+    chat_id: request.chat.id,
+    user_id: tg.user_id,
+    until_date: GetTime(key, time),
+    on_result: "/baned " + tg.user_id + " " + time + " " + key + " " + optional
+  })
+  return
+}
+//function
+function GetOptional(op, text) {
+  if (!op) {
+    return text
+  }
+  return op
 }
 

@@ -3,7 +3,7 @@
   help: 
   need_reply: false
   auto_retry_time: 
-  folder: Test command 
+  folder: Test command
   answer: 
   keyboard: 
   aliases: 

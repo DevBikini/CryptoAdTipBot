@@ -19,14 +19,14 @@ var amount = params.split(" ")[0]
 var currency = params.split(" ")[1]
 var numberPeople = params.split(" ")[2]
 if (
-  !amount ||
-  !numberPeople ||
-  !currency ||
-  !isNumeric(amount) ||
-  amount.includes("-") ||
-  amount.includes("+") ||
-  !isNumeric(numberPeople) ||
-  numberPeople.includes("-") ||
+  !amount &&
+  !numberPeople &&
+  !currency &&
+  !isNumeric(amount) &&
+  amount.includes("-") &&
+  amount.includes("+") &&
+  !isNumeric(numberPeople) &&
+  numberPeople.includes("-") &&
   numberPeople.includes("+")
 ) {
   Bot.sendMessage("⚠️ Incorrect Format use\n`/giveaway 1 btc 10`")
@@ -93,3 +93,4 @@ Api.sendMessage({
     ]
   }
 })
+

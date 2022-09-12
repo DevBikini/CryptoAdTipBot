@@ -29,8 +29,8 @@ var admin = Bot.getProperty("admin_" + request.chat.id, { list: {} })
 if (request.reply_to_message) {
   if (admin.list[user.telegramid] == user.telegramid) {
     var tgid = request.reply_to_message.from.id
-    var botk = request.reply_to_messagw.from.id.is_bot
-//valid user
+    var botk = request.reply_to_message.from.id.is_bot
+    //valid user
     if (!Bot.getProperty(tgid)) {
       Bot.sendMessage("*User not found*!")
       return
@@ -95,7 +95,7 @@ if (!params) {
   if (admin.list[user.telegramid] == user.telegramid) {
     var tg = Bot.getProperty(params.split(" ")[0])
     //admin and bot
-    if (admin.list[tg] == tg) {
+    if (admin.list[tg.user_id] == tg.user_id) {
       Bot.sendMessage("You Can't mute admininstration or bot & channel")
       return
     }
@@ -126,11 +126,7 @@ if (!params) {
       return
     }
     var cov = params.split(key)[1]
-    if (!cov) {
-      var optional = "und3"
-    } else {
-      var optional = cov
-    }
+    var optional = GetOptional(cov)
     Api.restrictChatMember({
       chat_id: request.chat.id,
       user_id: tg.user_id,
@@ -141,3 +137,11 @@ if (!params) {
     return
   }
 }
+//function
+function GetOptional(cov) {
+  if (!cov) {
+    return "und3"
+  }
+  return cov
+}
+

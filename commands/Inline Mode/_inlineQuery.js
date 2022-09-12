@@ -82,4 +82,3 @@ function GetName(name) {
 if (query) {
   GetName(params)
 }
-

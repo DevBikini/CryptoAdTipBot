@@ -48,4 +48,3 @@ if (params == "false") {
   return
 }
 Bot.sendMessage("⚠️ Incorrect Format use \n`/autodelete true / false`")
-

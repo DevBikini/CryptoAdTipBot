@@ -12,6 +12,7 @@ CMD*/
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n)
 }
+//get timestamp
 function toTimestamp(strDate) {
   var datum = Date.parse(strDate)
   return datum / 1000
@@ -21,19 +22,16 @@ function GetTime(seconds, time) {
   var now = new Date()
   if (seconds == "seconds") {
     now.setSeconds(now.getSeconds() + add_time + 3)
-  } else {
-    if (seconds == "minutes") {
-      now.setMinutes(now.getMinutes() + add_time)
-    } else {
-      if (seconds == "hours") {
-        now.setHours(now.getHours() + add_time)
-      } else {
-        if (seconds == "days") {
-          var atn = 24 * add_time
-          now.setHours(now.getHours() + atn)
-        }
-      }
-    }
+  }
+  if (seconds == "minutes") {
+    now.setMinutes(now.getMinutes() + add_time)
+  }
+  if (seconds == "hours") {
+    now.setHours(now.getHours() + add_time)
+  }
+  if (seconds == "days") {
+    var atn = 24 * add_time
+    now.setHours(now.getHours() + atn)
   }
   var month = Libs.DateTimeFormat.format(now, "mm")
   var day = Libs.DateTimeFormat.format(now, "dd")
@@ -46,50 +44,41 @@ function GetTime(seconds, time) {
   )
   return date
 }
-//add user html
-if (!user.username) {
-  if (!user.first_name) {
-    var html =
+//get user html
+function GetHtml() {
+  if (user.username) {
+    var tex = "@" + user.username
+  }
+  if (user.last_name) {
+    var tex =
       "<a href='tg://user?id=" +
       user.telegramid +
       "'>" +
       user.last_name +
       "</a>"
-  } else {
-    var html =
+  }
+  if (user.first_name) {
+    var tex =
       "<a href='tg://user?id=" +
       user.telegramid +
       "'>" +
       user.first_name +
       "</a>"
   }
-} else {
-  var html = "@" + user.username
+  return tex
 }
-//add user markdown
-if (!user.username) {
-  if (!user.first_name) {
-    var markdown =
-      "[" + user.last_name + "](tg://user?id=" + user.telegramid + ")"
-  } else {
-    var markdown =
-      "[" + user.first_name + "](tg://user?id=" + user.telegramid + ")"
+//get user markdown
+function GetMarkdown() {
+  if (user.username) {
+    var tex = "@" + user.username
   }
-} else {
-  var markdown = "@" + user.username
-}
-Bot.setProperty(
-  user.telegramid,
-  { user_id: user.telegramid, markdown: markdown, html: html },
-  "json"
-)
-//add user
-if (user.username) {
-  Bot.setProperty(
-    "@" + user.username,
-    { user_id: user.telegramid, markdown: markdown, html: html },
-    "json"
-  )
+  if (user.last_name) {
+    var tex = "[" + user.last_name + "](tg://user?id=" + user.telegramid + ")"
+  }
+  if (user.first_name) {
+    var tex = "[" + user.first_name + "](tg://user?id=" + user.telegramid + ")"
+  }
+  return tex
 }
 //reset every 3 hours
 function canRun1() {
@@ -97,25 +86,23 @@ function canRun1() {
   if (!last_run_at) {
     return true
   }
-  var resf = ""
   var minutes = (Date.now() - last_run_at) / 1000 / 60
-  var minutes_in_day = 24 * 60
+  var minutes_in_day = 3 * 60
   if (minutes < minutes_in_day) {
-    return resf
+    return false
   }
   return true
 }
-//cooldown 10 seconds
+//cooldown 6 seconds
 function coolDownPlay() {
   var last_run_at = User.getProperty("cooldown_Play")
   if (!last_run_at) {
     return true
   }
-  var resf = ""
   var minutes = (Date.now() - last_run_at) / 100 / 20
   var minutes_in_day = 3
   if (minutes < minutes_in_day) {
-    return resf
+    return false
   }
   return true
 }
@@ -125,11 +112,10 @@ function coolDown() {
   if (!last_run_at) {
     return true
   }
-  var resf = ""
   var minutes = (Date.now() - last_run_at) / 100 / 20
   var minutes_in_day = 10
   if (minutes < minutes_in_day) {
-    return resf
+    return false
   }
   return true
 }
@@ -166,13 +152,46 @@ function getOnline(top_count) {
 //get percentage
 function Getko(users, amount, recent) {
   var random = Math.floor(Math.random() * (recent - 1))
-  if (random == 0) {
-    var rasta = 1.5
-  } else {
-    var rasta = random
-  }
+  var rasta = Getrasta(random)
   var clc = (amount * rasta) / 100
   var dam = clc + "&" + random
   return dam
+}
+function Getrasta(random) {
+  if (random == 0) {
+    return 1.5
+  }
+  return random
+}
+Bot.setProperty(
+  user.telegramid,
+  {
+    user_id: user.telegramid,
+    markdown: GetMarkdown(),
+    html: GetHtml()
+  },
+  "json"
+)
+//add user
+if (user.username) {
+  Bot.setProperty(
+    "@" + user.username,
+    {
+      user_id: user.telegramid,
+      markdown: GetMarkdown(),
+      html: GetHtml()
+    },
+    "json"
+  )
+  //user
+  Bot.setProperty(
+    user.username,
+    {
+      user_id: user.telegramid,
+      markdown: GetMarkdown(),
+      html: GetHtml()
+    },
+    "json"
+  )
 }
 

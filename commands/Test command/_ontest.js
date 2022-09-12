@@ -3,10 +3,11 @@
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: Test command 
+  folder: Test command
   answer: 
   keyboard: 
   aliases: 
 CMD*/
 
-Bot.inspect(request)
+Bot.inspect(content)
+Bot.inspect(content)

@@ -3,7 +3,7 @@
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: Betting 
+  folder: Betting
   answer: 
   keyboard: 
   aliases: 
@@ -19,6 +19,7 @@ if (five) {
   if (results < 4) {
     if (params == "soccer") {
       if (results == 3) {
+        //balance.add(-amount)
         var amnt = amount * 1.8
         var f_amn = amnt - amount
         balance.add(+f_amn)
@@ -48,6 +49,7 @@ if (five) {
     )
     return
   } else {
+    //balance.add(-amount)
     var amnt = amount * 1.8
     var f_amn = amnt - amount
     balance.add(+amnt)
@@ -81,6 +83,7 @@ if (params == "dart") {
     )
     return
   } else {
+    //balance.add(-amount)
     var amnt = amount * 1.8
     var f_amn = amnt - amount
     balance.add(+f_amn)
@@ -101,6 +104,7 @@ if (params == "dart") {
 }
 if (results == 6) {
   var amnt = amount * 2.6
+  //balance.add(-amount)
   var f_amn = amnt - amount
   balance.add(+f_amn)
   Bot.sendMessage(
@@ -126,4 +130,3 @@ if (results == 6) {
       results
   )
 }
-

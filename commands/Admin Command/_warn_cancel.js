@@ -41,4 +41,3 @@ if (admin.list[user.telegramid] == user.telegramid) {
     show_alert: true
   })
 }
-

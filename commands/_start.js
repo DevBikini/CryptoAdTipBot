@@ -29,6 +29,7 @@ if (chat.chat_type == "private") {
     ],
     "Welcome to " + bot.name + " check out our featured command"
   )
-  return
+} else {
+  Bot.sendMessage("[start me on private chat](t.me/" + bot.name + ")")
 }
-Bot.sendMessage("[start me on private chat](t.me/"+bot.name+")")
+

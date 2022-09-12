@@ -31,7 +31,7 @@ if (request.reply_to_message) {
   var botk = request.reply_to_message.from.id.is_bot | (tgid == 777000)
   var datauser = Bot.getProperty(tgid)
   if (admin.list[user.telegramid] == user.telegramid) {
-//valid user
+    //valid user
     if (!Bot.getProperty(tgid)) {
       Bot.sendMessage("*User not found*!")
       return
@@ -67,33 +67,33 @@ if (request.reply_to_message) {
         },
         parse_mode: "html"
       })
-    } else {
-      Api.banChatMember({
-        chat_id: request.chat.id,
-        user_id: tgid,
-        revoke_messages: true
-      })
-      Api.sendMessage({
-        text:
-          datauser.html +
-          " [<code>" +
-          datauser.user_id +
-          "</code>] Kicked Out.\n• <b>Due to</b>: " +
-          params,
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "✅ Unban",
-                callback_data:
-                  "/2ndunban " + datauser.user_id + " und2 und3 " + params
-              }
-            ]
-          ]
-        },
-        parse_mode: "html"
-      })
+      return
     }
+    Api.banChatMember({
+      chat_id: request.chat.id,
+      user_id: tgid,
+      revoke_messages: true
+    })
+    Api.sendMessage({
+      text:
+        datauser.html +
+        " [<code>" +
+        datauser.user_id +
+        "</code>] Kicked Out.\n• <b>Due to</b>: " +
+        params,
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "✅ Unban",
+              callback_data:
+                "/2ndunban " + datauser.user_id + " und2 und3 " + params
+            }
+          ]
+        ]
+      },
+      parse_mode: "html"
+    })
   }
   return
 }
@@ -101,11 +101,11 @@ if (request.reply_to_message) {
 if (!params) {
   var datauser1 = Bot.getProperty(params)
   if (admin.list[user.telegramid] == user.telegramid) {
-//admin and bot
-  if (admin.list[params] == params) {
-    Bot.sendMessage("You Can't kick admininstration or bot & channel")
-    return
-  }
+    //admin and bot
+    if (admin.list[params] == params) {
+      Bot.sendMessage("You Can't kick admininstration or bot & channel")
+      return
+    }
     if (!datauser1) {
       Bot.sendMessage("*User not found*!")
       return
@@ -134,32 +134,33 @@ if (!params) {
       },
       parse_mode: "html"
     })
-  } else {
-    Api.banChatMember({
-      chat_id: request.chat.id,
-      user_id: datauser1.user_id,
-      revoke_messages: true
-    })
-    Api.sendMessage({
-      text:
-        datauser1.html +
-        " [<code>" +
-        datauser1.user_id +
-        "</code>] Kicked Out.\n• <b>Due to</b>: " +
-        params,
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "✅ Unban",
-              callback_data:
-                "/2ndunban " + datauser1.user_id + " und2 und3 " + params
-            }
-          ]
-        ]
-      },
-      parse_mode: "html"
-    })
+    return
   }
+  Api.banChatMember({
+    chat_id: request.chat.id,
+    user_id: datauser1.user_id,
+    revoke_messages: true
+  })
+  Api.sendMessage({
+    text:
+      datauser1.html +
+      " [<code>" +
+      datauser1.user_id +
+      "</code>] Kicked Out.\n• <b>Due to</b>: " +
+      params,
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "✅ Unban",
+            callback_data:
+              "/2ndunban " + datauser1.user_id + " und2 und3 " + params
+          }
+        ]
+      ]
+    },
+    parse_mode: "html"
+  })
   return
 }
+

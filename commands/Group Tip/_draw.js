@@ -86,4 +86,3 @@ Api.sendMessage({
     "</code> users.\nSend <code>Grab</code> to grab it!",
   parse_mode: "html"
 })
-

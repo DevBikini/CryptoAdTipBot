@@ -41,4 +41,3 @@ if (!params) {
     success: "/onConvert " + amount + " " + coin_2.toLowerCase()
   })
 }
-

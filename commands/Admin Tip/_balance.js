@@ -30,7 +30,7 @@ if (chat.chat_type == "private") {
     Api.sendMessage({
       text:
         "<b>Available balance</b>\n\n<b>You have</b>: <code>" +
-        balance.value() +
+        balance.value().toFixed(10) +
         "</code> " +
         params.toUpperCase() +
         "\n\n👉 Try <code>/balance Token</code> to check the balance of a certain token. E.g: <code>/balance BTC</code>",
@@ -44,7 +44,7 @@ if (chat.chat_type == "private") {
         var full =
           full +
           "<b>You have</b>: <code>" +
-          balance.value() +
+          balance.value().toFixed(10) +
           "</code> " +
           cur.list[ind] +
           "\n"
@@ -80,7 +80,7 @@ if (params) {
     text:
       data.html +
       " <b>Available balance</b>\n\n<b>You have</b>: <code>" +
-      balance.value() +
+      balance.value().toFixed(10) +
       "</code> " +
       params.toUpperCase() +
       "\n\n👉 Try <code>/balance Token</code> to check the balance of a certain token. E.g: <code>/balance BTC</code>",
@@ -94,7 +94,7 @@ if (params) {
       var full =
         full +
         "<b>You have</b>: <code>" +
-        balance.value() +
+        balance.value().toFixed(10) +
         "</code> " +
         cur.list[ind] +
         "\n"
@@ -109,3 +109,4 @@ if (params) {
     parse_mode: "html"
   })
 }
+

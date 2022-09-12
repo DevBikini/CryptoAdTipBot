@@ -38,59 +38,26 @@ if (!params) {
     var user_id = options.result[ind].user.id
     add.list[user_id] = user_id
     Bot.setProperty("admin_" + params, add, "json")
-    if (!options.result[ind].user.first_name) {
-      if (options.result[ind].user.last_name) {
-        var realname = options.result[ind].user.last_name
-      } else {
-        var realname = "Deleted Account"
-      }
-    } else {
-      var realname = options.result[ind].user.first_name
-    }
-    if (!options.result[ind].user.username) {
-      var user_name =
-        "<a href='tg://user?id=" +
-        options.result[ind].user.id +
-        "'>" +
-        realname +
-        "</a>"
-    } else {
-      var user_name = "@" + options.result[ind].user.username
-    }
+    var realname = GetRealName()
+    var user_name = GetUserName()
     //creator
     if (options.result[ind].status == "creator") {
       var owner = owner + user_name
     }
-    //find co founder 👇
+    //find co founder
     if (options.result[ind].status == "administrator") {
       //title 👇
-      if (options.result[ind].custom_title) {
-        var title = " » " + options.result[ind].custom_title
-      } else {
-        var title = " » Admin"
-      }
-      //end title 👆
+      var title = GetTitle()
       if (options.result[ind].can_promote_members) {
-        if (options.result[ind].can_promote_members == "true") {
-          var co_admin = co_admin + "\n ├ " + user_name + title
-        }
-        var co_admin = co_admin + "\n ├ " + user_name + title
+        var co_admin = co_admin + "\n├" + user_name + title
       } else {
-        var admin = admin + "\n ├ " + user_name + title
+        var admin = admin + "\n├" + user_name + title
       }
     }
-    //end co founder 👆
   }
-  if (!co_admin) {
-    var co_founder = ""
-  } else {
-    var co_founder = "\n\n⚜️ <b>Co-founder</b>" + co_admin
-  }
-  if (!admin) {
-    var admins = ""
-  } else {
-    var admins = "\n\n👮🏼 <b>Admin</b> " + admin
-  }
+
+  var co_founder = Get_co("\n\n⚜️ <b>Co-founder</b>", co_admin)
+  var admins = Get_co("\n\n👮🏼 <b>Admin</b> ", admin)
   Api.sendMessage({
     text:
       "<b>GROUP STAFF\n\n👑 Founder</b>\n └ " +
@@ -101,4 +68,39 @@ if (!params) {
     parse_mode: "html"
   })
 }
-
+//function
+function GetRealName() {
+  if (options.result[ind].user.first_name) {
+    return options.result[ind].user.first_name
+  }
+  if (options.result[ind].user.last_name) {
+    return options.result[ind].user.last_name
+  }
+  return "Deleted Account"
+}
+//GetUserName
+function GetUserName() {
+  if (!options.result[ind].user.username) {
+    return
+    "<a href='tg://user?id=" +
+      options.result[ind].user.id +
+      "'>" +
+      realname +
+      "</a>"
+  }
+  return "@" + options.result[ind].user.username
+}
+//GetTitle
+function GetTitle() {
+  if (options.result[ind].custom_title) {
+    return " » " + options.result[ind].custom_title
+  }
+  return " » Admin"
+}
+//get co
+function Get_co(text, name) {
+  if (!name) {
+    return ""
+  }
+  return text + name
+}

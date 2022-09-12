@@ -138,4 +138,3 @@ Api.sendMessage({
     "`\n\n[Ads Earn FREE Crypto](https://t.me/Crypto_Ad_RoBot?start=ref8785339)",
   parse_mode: "Markdown"
 })
-

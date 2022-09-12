@@ -1,9 +1,9 @@
 /*CMD
-  command: /enable
+  command: /disable
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: Betting 
+  folder: Betting
   answer: 
   keyboard: 
   aliases: 
@@ -26,8 +26,7 @@ if (chat.chat_type == "private") {
 }
 var admin = Bot.getProperty("admin_" + request.chat.id, { list: {} })
 if (admin.list[user.telegramid] == user.telegramid) {
-  Bot.setProperty("disable_" + request.chat.id, "", "string")
-Bot.sendMessage("*Betting Mode Enabled*")
+  Bot.sendMessage("*Betting Mode Disable*")
+  Bot.setProperty("disable_" + request.chat.id, "disable", "string")
   return
 }
-

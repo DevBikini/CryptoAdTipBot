@@ -149,4 +149,3 @@ Api.answerInlineQuery({
   results: list,
   cache_time: 4
 })
-

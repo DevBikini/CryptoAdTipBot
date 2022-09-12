@@ -3,7 +3,7 @@
   help: 
   need_reply: 
   auto_retry_time: 
-  folder: Betting 
+  folder: Betting
   answer: 
   keyboard: 
   aliases: 
@@ -29,7 +29,7 @@ if (!cur.list[curs.toUpperCase()]) {
       is_reply: true
     }
   )
+return 
 }
 User.setProperty("bet", amount + " " + curs.toUpperCase(), "string")
 Bot.sendMessage("✅ *Bet Set. Done *")
-

@@ -9,7 +9,12 @@
   aliases: 
 CMD*/
 
+var my_cdm = User.getProperty("my_cdm")
 if (params == "basketball") {
+  if (my_cdm == "basketball") {
+    return
+  }
+  User.setProperty("my_cdm", "basketball", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text: "🏀 *Basketball 1.8x your coins\n\nRules*: shoot the ball",
@@ -55,6 +60,10 @@ if (params == "basketball") {
 }
 //Soccer
 if (params == "soccer") {
+  if (my_cdm == "soccer") {
+    return
+  }
+  User.setProperty("my_cdm", "soccer", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text: "⚽ *Soccer 1.8x your coins\n\nRules*: Goal the ball",
@@ -100,6 +109,10 @@ if (params == "soccer") {
 }
 //dart
 if (params == "dart") {
+  if (my_cdm == "dart") {
+    return
+  }
+  User.setProperty("my_cdm", "dart", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text: "🎯 *Dart 1.8x your coins\n\nRules*: Hit the Red.",
@@ -145,6 +158,10 @@ if (params == "dart") {
 }
 //bowling
 if (params == "bowling") {
+  if (my_cdm == "bowling") {
+    return
+  }
+  User.setProperty("my_cdm", "bowling", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text: "🎳 *Bowling 2.6x your coins\n\nRules*: Hit the 6.",
@@ -190,6 +207,10 @@ if (params == "bowling") {
 }
 //dice
 if (params == "dice") {
+  if (my_cdm == "dice") {
+    return
+  }
+  User.setProperty("my_cdm", "dice", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text: "🎲 *Dice 2.6x your coins\n\nRules*: Hit the 6.",
@@ -234,3 +255,4 @@ if (params == "dice") {
   return
 }
 Bot.sendMessage(params)
+

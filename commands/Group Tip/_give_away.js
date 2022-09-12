@@ -41,7 +41,8 @@ if (participate + 1 < numberPeople) {
   }
   if (!User.getProperty("giveaway=" + id)) {
     Api.sendMessage({
-      text: data.html + " You have already received this airdrop."
+      text: data.html + " You have already received this airdrop.",
+      parse_mode: "html"
     })
     User.setProperty("giveaway=" + id, { hi: "hi" }, "json")
     return
@@ -77,7 +78,8 @@ if (participate < numberPeople) {
   }
   if (!User.getProperty("giveaway=" + id)) {
     Api.sendMessage({
-      text: data.html + " You have already received this airdrop."
+      text: data.html + " You have already received this airdrop.",
+      parse_mode: "html"
     })
     User.setProperty("giveaway=" + id, { hi: "hi" }, "json")
     return

@@ -10,7 +10,12 @@
 CMD*/
 
 var name = params.split(" ")[0]
+var my_cdm = User.getProperty("my_cdm")
 if (name == "price") {
+  if (my_cdm == "price") {
+    return
+  }
+  User.setProperty("my_cdm", "price", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text:
@@ -38,6 +43,10 @@ if (name == "price") {
   return
 }
 if (name == "tip") {
+  if (my_cdm == "tip") {
+    return
+  }
+  User.setProperty("my_cdm", "tip", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text:
@@ -65,6 +74,10 @@ if (name == "tip") {
   return
 }
 if (name == "manager") {
+  if (my_cdm == "manager") {
+    return
+  }
+  User.setProperty("my_cdm", "manager", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text:
@@ -92,6 +105,10 @@ if (name == "manager") {
   return
 }
 if (name == "game") {
+if (my_cdm == "game") {
+    return
+  }
+  User.setProperty("my_cdm", "game", "string")
   Api.editMessageText({
     message_id: request.message.message_id,
     text:
@@ -118,3 +135,4 @@ if (name == "game") {
   })
   return
 }
+
